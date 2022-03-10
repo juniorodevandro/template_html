@@ -1,22 +1,26 @@
 <?php
-class html{
+class Html{
+   
     private $lang;
-    private $conteudo;
-
-    function __construct($doctype, $lang, $conteudo) {
-        $this->doctype =$doctype;        
-        $this->lang = $lang;
-        $this->conteudo = $conteudo;
+    private $head;
+    private $body;
+    
+    public function __construct($pLang, $pHead, $pBody) {
+        $this->lang = $pLang;
+        $this->head = $pHead;
+        $this->body = $pBody;
     }
 
-    function __toString(){
-        return  $this->doctype . 
-                '<html lang="' . $this->lang . '">' .
-                $this->conteudo . 
-                '</html>';
+    public function __toString(){
+        $sHtml = "<!DOCTYPE html>\n<html lang=\"{$this->lang}\">\n";
+              
+        $sHtml .= $this->head;
+        $sHtml .= $this->body;
+        
+        $sHtml .= '</html>';
+        return $sHtml;
     }
 
+
+    
 }
-
-
-

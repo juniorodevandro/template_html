@@ -1,24 +1,24 @@
 <?php
 
-class ul{
-    private $css;
-    private $itens;
+class Ul {
+    
+    private $aLista = array();
+    private $sClass;
 
-    public function __construct($classe, $itens){
-        $this->css = $classe;
-        $this->itens = $itens;
+    public function __construct($sClass) {
+        $this->sClass = $sClass;
     }
 
-    public function addItem($item){
-        $this->itens = array_merge($this->itens, $item);
+    public function addElement(...$sAtributo) {
+        $this->aLista = array_merge($this->aLista, $sAtributo);
     }
 
-    public function __toString(){
-        $retorno = "<ul>";
-        foreach ($this->itens as $item){
-            $retorno .= $item;
+    public function __toString() {
+        $sUl = '<ul class="'.$this->sClass.'">';
+        foreach ($this->aLista as $sItemLista) {
+            $sUl .= $sItemLista;
         }
-        $retorno .= "</ul>";
-        return $retorno;
-    }   
+        $sUl .= "</ul>\n";
+        return $sUl;
+    }
 }

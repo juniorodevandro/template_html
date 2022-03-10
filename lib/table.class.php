@@ -1,42 +1,50 @@
 <?php
 
-class table{
-    function __construct($prColumnName = array(), $prTable = array(), $vLinePage, $vClass){
-        $this->ColumnName = $prColumnName;        
-        $this->Table = $prTable;
-        $this->LinePage = $vLinePage;
-        $this->Class = $vClass;
-    }
 
-    function __toString() {
-        $Result = '<table border="1" ';
+class Table {
 
-        if(!is_null($this->Class)){
-            $Result .= 'class= "' . $this->Class . '"';
-        }
-        $Result .= '>';
+	private $id;
+	private $classes;
+	private $thead;
+	private $tbody;
+	private $tfoot;
+
+	public function __construct($vId, $vClasses, $vThead, $vTbody, $vTfoot) {
+		$this->id = $vId;
+		$this->classes = $vClasses;
+		$this->thead = $vThead;
+		$this->tbody = $vTbody;
+		$this->tfoot = $vTfoot;
+	}
+
+	public function __toString() {
+        $table = "<table";
         
-        if(!empty($this->ColumnName)) {
-            foreach($this->ColumnName as $vColumnName){
-                $Result .= '<th>' . $vColumnName . '</th>';
-            }
-        }
-        
-        for($i=0; $i <= $this->LinePage - 1; $i++) { 
-            $Result .= '<tr>'; 
+        if (!is_null($this->classes) && !empty($this->classes)) {
+			$table .= " class='" . $this->classes . "'";
+		}
 
-            for($j=0; $j <=   count($this->Table) - 1; $j++) { 
-                $Result .= '<td>' .$this->Table[$i] [$j] . '</td>';                    
-            }
-            $Result .= '</tr>';
+		if (!is_null($this->id) && !empty($this->id)) {
+			$table .= " id='" . $this->id . "'";
+		}
 
-            if ($j <= count($this->Table) - 1) {
-                break;
-            }
-        }                   
-        
-        $Result .= '</table>';
 
-        return $Result;
-    }
+		$table .= ">";
+
+		if (!is_null($this->thead) && !empty($this->thead)) {
+			$table .= $this->thead;
+		}
+		if (!is_null($this->tbody) && !empty($this->tbody)) {
+			$table .= $this->tbody;
+		}
+		if (!is_null($this->tfoot) && !empty($this->tfoot)) {
+			$table .= $this->tfoot;
+		}
+
+		$table .= "</table>";
+
+		return $table;
+	}
+
+
 }

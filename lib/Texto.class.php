@@ -1,6 +1,6 @@
 <?php
 
-class Title {
+class Texto {
     
     private $text;
 
@@ -9,7 +9,7 @@ class Title {
     }
     
     public function __toString() {
-        return "<title>{$this->text}</title>\n";
+        return "{$this->text}";
     }
 
 }

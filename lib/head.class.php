@@ -1,14 +1,21 @@
 <?php
-class head{
-    private $conteudo;
 
-    function __construct($lang, $conteudo){
-        $this->conteudo = $conteudo;
+class Head {
+    private $aListElement = array();
+    
+    public function __construct() {
     }
 
-    function __toString(){
-        return  '<head>' . 
-                    $this->conteudo .
-                '</head>';
+    public function addElement($sElement) {
+        $this->aListElement[] = $sElement;
+    }
+
+    public function __toString(){
+        $sHead = "<head>\n";
+        foreach ($this->aListElement as $sItemListElement) {
+            $sHead .= $sItemListElement;
+        }
+        $sHead .= "</head>\n";
+        return $sHead;
     }
 }

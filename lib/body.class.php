@@ -1,15 +1,23 @@
 <?php
+class Body {
 
-class body{
-    private $conteudo;
-
-    function __construct($conteudo){
-        $this->conteudo = $conteudo;
+    private $class;
+    private $aListElement = array();
+    
+    public function __construct($sClass) {
+        $this->class = $sClass;
     }
 
-    function __toString(){
-        return  '<body> ' . 
-                    $this->conteudo . 
-                '</body>';
+    public function addElement($sElement) {
+        $this->aListElement[] = $sElement;
+    }
+
+    public function __toString(){
+        $sBody = "<body class=\"{$this->class}\">\n";
+        foreach ($this->aListElement as $sItemListElement) {
+            $sBody .= $sItemListElement;
+        }
+        $sBody .= "</body>\n";
+        return $sBody;
     }
 }
