@@ -3,9 +3,6 @@
 class Head {
     private $aListElement = array();
     
-    public function __construct() {
-    }
-
     public function addElement($sElement) {
         $this->aListElement[] = $sElement;
     }

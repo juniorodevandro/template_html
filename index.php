@@ -3,6 +3,9 @@ require('autoload.php');
 
 GLOBAL $conn;
 $conn = new Conexao();
+// $result = $conn->getSelect("SELECT * FROM pessoa");
+// echo $result->nome;
+
 $metaCharset = new Meta("UTF-8");
 $metaHttEquiv = new Meta(null, null, "X-UA-Compatible", "IE=edge");
 $metaName = new Meta(null, "viewport", null, "width=device-width, initial-scale=1.0");
@@ -56,29 +59,16 @@ if (isset($_GET["pagina"])) {
         $cabecalho[$i] = $colunas[$i];
     }
 
-    $teste = ['valor','teste'];
-
-    $tabela = new Table('table','table',new Thead('class',$cabecalho),new TBody('class',$teste),null);
-
     $colunas = explode(",",$consulta_dados[0]->colunas);
     for ($i=0;$i<=count($colunas)-1;$i++) {
         @$pagina .= $colunas[$i]."   ";
     }
-    $pagina .= "<br>";
-    foreach($dados_tabela as $valor) {
-        for ($i=0;$i<=count($colunas)-1;$i++) {
-            $obj_array = get_object_vars($valor);
-            $array_keys = array_keys($obj_array);
-            $pagina .= $obj_array[$array_keys[$i]]."   ";
-        }
-        $pagina .= "<br>";
-    }
-    
+
 } else  {
     $tabela = new Table(null,null,null,null,null);
     $pagina = "Selecione uma das opções no menu";
 }
-$miolo->addElement($tabela);
+$miolo->addElement($pagina);
 
 $areaprincipal->addElement($menu);
 $areaprincipal->addElement($miolo);
